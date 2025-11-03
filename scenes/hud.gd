@@ -20,7 +20,7 @@ func show_gameover():
 	show_message("Game Over")
 	await $MessageTimer.timeout
 	
-	$Message.text = "I;m thinking about thos Beans"
+	$Message.text = "Still thinking about thos Beans"
 	$Message.show()
 	$BillFoster.show()
 	
