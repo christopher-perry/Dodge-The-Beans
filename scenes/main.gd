@@ -28,7 +28,7 @@ func new_game():
 	music.play()
 	score = 0
 	$HUD.update_score(score)
-	$HUD.show_message("Get Ready")
+	$HUD.show_temp_message("Get Ready")
 	get_tree().call_group("mobs", "queue_free")
 	$Player.start($StartPosition.position)
 	$StartTimer.start()

@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 signal start_game
+var game_over_text = "Still thinking about thos Beans"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -10,19 +11,20 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
+func show_temp_message(text):
+	show_message(text)
+	$MessageTimer.start()
+	
 func show_message(text):
 	$Message.text = text
 	$Message.show()
 	$BillFoster.show()
-	$MessageTimer.start()
 	
 func show_gameover():
-	show_message("Game Over")
+	show_temp_message("Game Over")
 	await $MessageTimer.timeout
 	
-	$Message.text = "Still thinking about thos Beans"
-	$Message.show()
-	$BillFoster.show()
+	show_message(game_over_text)
 	
 	await get_tree().create_timer(1.0).timeout
 	$StartButton.show()
