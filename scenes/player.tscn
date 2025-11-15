@@ -59,4 +59,16 @@ rotation = 1.4046513
 scale = Vector2(0.094827585, 0.09523808)
 texture = ExtResource("6_tuyoq")
 
+[node name="BeanSpawnPoint" type="ReferenceRect" parent="BeanLauncher/Sprite2D"]
+visible = false
+anchors_preset = -1
+anchor_left = 0.684
+anchor_top = 0.5
+anchor_right = 0.684
+anchor_bottom = 0.5
+offset_left = -320.1746
+offset_top = -558.0312
+offset_right = -280.17462
+offset_bottom = -518.0312
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

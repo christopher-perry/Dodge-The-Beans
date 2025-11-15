@@ -13,6 +13,7 @@ var screen_size
 @onready var sprite = $AnimatedSprite2D
 @onready var collision = $CollisionShape2D
 @onready var bean_launcher = $BeanLauncher
+@onready var bean_spawn_point = $BeanLauncher/Sprite2D/BeanSpawnPoint
 @onready var shooting_cooldown = $FireTimer
 
 func start(pos):
@@ -81,7 +82,7 @@ func _process(delta: float) -> void:
 
 func launch_bean(direction: Vector2):
 	can_fire = false
-	var launch_pos = bean_launcher.global_position
+	var launch_pos = bean_spawn_point.global_position
 	bean_launched.emit(launch_pos, direction)
 	shooting_cooldown.start(bean_cooldown)
 
