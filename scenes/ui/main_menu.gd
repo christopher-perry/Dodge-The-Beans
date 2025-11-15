@@ -1,9 +1,9 @@
 # level_1.gd
 extends Control
 
-@onready var start_button: Button = $MenuOptionsContainer/StartButton
-@onready var options_button: Button = $MenuOptionsContainer/OptionsButton
-@onready var exit_button: Button = $MenuOptionsContainer/ExitButton
+@onready var start_button: Button = $Layout/MenuOptionsContainer/StartButton
+@onready var options_button: Button = $Layout/MenuOptionsContainer/OptionsButton
+@onready var exit_button: Button = $Layout/MenuOptionsContainer/ExitButton
 
 const OPTIONS_SCENE: PackedScene = preload("res://scenes/ui/Options.tscn")
 
@@ -17,25 +17,23 @@ func _ready():
 
 func _on_start_button_pressed():
 	get_tree().change_scene_to_file("res://scenes/levels/level_1.tscn")
+
 func _on_options_button_pressed():
 	var options_menu_instance = OPTIONS_SCENE.instantiate()
 	add_child(options_menu_instance)
 	set_process_unhandled_input(false)
 	set_menu_buttons_disabled(true)
 	
-	# Hook up the callback to restore main menu navigation
 	options_menu_instance.closed.connect(_on_options_menu_closed) 
 
 func _on_options_menu_closed():
-	# Restore main menu focus and navigation
 	set_process_unhandled_input(true)
 	set_menu_buttons_disabled(false)
 	options_button.grab_focus()
 
 func _on_exit_button_pressed():
-	# play_click_sfx() # Optional
 	print("Exit Game Pressed!")
-	get_tree().quit() # Quits the game
+	get_tree().quit()
 
 func _input(event):
 	if event is InputEventKey and event.pressed:

@@ -1,0 +1,10 @@
+[gd_resource type="LabelSettings" load_steps=3 format=3 uid="uid://tdoxglijt3r0"]
+
+[ext_resource type="FontFile" uid="uid://bspccpt0yes1b" path="res://fonts/Xolonium-Regular.ttf" id="1_t6oiv"]
+
+[sub_resource type="FontVariation" id="FontVariation_xpiny"]
+base_font = ExtResource("1_t6oiv")
+
+[resource]
+font = SubResource("FontVariation_xpiny")
+font_size = 40

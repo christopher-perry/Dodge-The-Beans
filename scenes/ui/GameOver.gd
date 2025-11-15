@@ -7,8 +7,8 @@ signal quit_requested
 const GAME_OVER_TEXT = "You Got Beaned!"
 @export var game_over_sfx: AudioStream
 @onready var game_over_label: Label = $GameOverText
-@onready var restart_button: Button = $OptionsBox/Buttons/RestartButton
-@onready var quit_button: Button = $OptionsBox/Buttons/QuitButton
+@onready var restart_button: Button = $OptionsBox/RestartButton
+@onready var quit_button: Button = $OptionsBox/QuitButton
 
 func _ready() -> void:
 	get_tree().paused = true

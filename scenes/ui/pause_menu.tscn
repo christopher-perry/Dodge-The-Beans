@@ -1,6 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://bsxdt647qd4t3"]
+[gd_scene load_steps=4 format=3 uid="uid://bsxdt647qd4t3"]
 
 [ext_resource type="Script" uid="uid://c8qywc5xvtcoi" path="res://scenes/ui/PauseMenu.gd" id="1_36lgw"]
+[ext_resource type="FontFile" uid="uid://bspccpt0yes1b" path="res://fonts/Xolonium-Regular.ttf" id="2_0lmf7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_f6eus"]
+font = ExtResource("2_0lmf7")
+font_size = 80
 
 [node name="PauseMenu" type="CanvasLayer"]
 process_mode = 2
@@ -26,19 +31,23 @@ offset_bottom = 116.0
 grow_horizontal = 2
 rotation = -0.0008096286
 text = "PAUSED"
+label_settings = SubResource("LabelSettings_f6eus")
 horizontal_alignment = 1
 
 [node name="PauseBar" type="VBoxContainer" parent="."]
-anchors_preset = 7
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -62.5
-offset_top = -128.0
-offset_right = 62.5
+anchor_bottom = 0.5
+offset_left = -63.0
+offset_top = -64.0
+offset_right = 63.0
+offset_bottom = 64.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
+scale = Vector2(2, 2)
+pivot_offset = Vector2(63, 0)
 
 [node name="Buttons" type="VBoxContainer" parent="PauseBar"]
 layout_mode = 2
