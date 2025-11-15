@@ -1,0 +1,71 @@
+name: "Godot CI Container Export (Web Only)"
+on:
+  push:
+    branches: [ "main" ]
+
+env:
+  GODOT_VERSION: 4.5.1
+  EXPORT_NAME: Dodge_The_Beans
+  PROJECT_PATH: .
+
+jobs:
+  export-web:
+    name: Web Export
+    runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:4.5.1
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          set-safe-directory: true
+
+      - name: Setup (Copy Templates)
+        run: |
+          # Copy export templates to the correct directory
+          mkdir -v -p ~/.local/share/godot/export_templates/
+          mv /root/.local/share/godot/export_templates/${{ env.GODOT_VERSION }}.stable ~/.local/share/godot/export_templates/${{ env.GODOT_VERSION }}.stable
+
+      - name: Web Build
+        run: |
+          mkdir -v -p build/web
+          godot --headless --verbose --export-release "Web" "build/web/index.html"
+
+      - name: Upload Web Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.EXPORT_NAME }}-web
+          path: build/web
+
+  deploy-web:
+    name: Deploy to GitHub Pages
+    needs: export-web
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    
+    permissions:
+      pages: write
+      id-token: write
+    
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    
+    steps:
+      - name: Download Web Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ env.EXPORT_NAME }}-web
+          path: build/web-deploy
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact to Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'build/web-deploy'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
