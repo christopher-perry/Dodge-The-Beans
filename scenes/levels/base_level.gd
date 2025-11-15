@@ -22,8 +22,8 @@ var pause_menu_instance: CanvasLayer = null
 var game_over_instance: CanvasLayer = null
 var score
 
-var ben_song = preload("res://art/audio/music/takedown.mp3")
-var normal_song = preload("res://art/audio/music/She Made Beans WTF But Its Safe And Sound By Capital Cities.mp3")
+var ben_song = preload("res://art/audio/music/Raining Tacos.ogg")
+var normal_song = preload("res://art/audio/music/She Made Beans WTF But Its Safe And Sound By Capital Cities.ogg")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

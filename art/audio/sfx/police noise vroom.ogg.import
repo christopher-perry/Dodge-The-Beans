@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://boqkirsepkx88"
+path="res://.godot/imported/police noise vroom.ogg-dee464518d4e8596183d7c9688f7e8ea.oggvorbisstr"
+
+[deps]
+
+source_file="res://art/audio/sfx/police noise vroom.ogg"
+dest_files=["res://.godot/imported/police noise vroom.ogg-dee464518d4e8596183d7c9688f7e8ea.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

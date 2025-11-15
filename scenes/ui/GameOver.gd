@@ -19,9 +19,11 @@ func _ready() -> void:
 	quit_button.pressed.connect(_on_quit_pressed)
 
 func _on_restart_pressed():
+	AudioController.stop_sfx()
 	get_tree().paused = false 
 	restart_requested.emit() 
 	hide()
 
 func _on_quit_pressed():
+	AudioController.stop_sfx()
 	quit_requested.emit()

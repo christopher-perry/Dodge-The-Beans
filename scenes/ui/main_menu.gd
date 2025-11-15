@@ -6,7 +6,6 @@ extends Control
 @onready var exit_button: Button = $MenuOptionsContainer/ExitButton
 
 const OPTIONS_SCENE: PackedScene = preload("res://scenes/ui/Options.tscn")
-#const TITLE_MUSIC = preload("res://art/audio/music/takedown.mp3")
 
 func _ready():
 	start_button.grab_focus()
@@ -15,8 +14,6 @@ func _ready():
 	start_button.pressed.connect(_on_start_button_pressed)
 	options_button.pressed.connect(_on_options_button_pressed)
 	exit_button.pressed.connect(_on_exit_button_pressed)
-
-	#AudioController.play_music(TITLE_MUSIC, "Music")
 
 func _on_start_button_pressed():
 	get_tree().change_scene_to_file("res://scenes/levels/level_1.tscn")

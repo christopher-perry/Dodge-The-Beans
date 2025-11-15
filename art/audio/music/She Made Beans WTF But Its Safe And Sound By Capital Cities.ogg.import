@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dsutfq8gmqdmq"
+path="res://.godot/imported/She Made Beans WTF But Its Safe And Sound By Capital Cities.ogg-46acd2b1e57041d4b49dc8815fda516d.oggvorbisstr"
+
+[deps]
+
+source_file="res://art/audio/music/She Made Beans WTF But Its Safe And Sound By Capital Cities.ogg"
+dest_files=["res://.godot/imported/She Made Beans WTF But Its Safe And Sound By Capital Cities.ogg-46acd2b1e57041d4b49dc8815fda516d.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
