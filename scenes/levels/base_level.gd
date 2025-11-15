@@ -12,10 +12,11 @@ var bean_scene: PackedScene = preload("res://scenes/Bean.tscn")
 @export
 var benMode = true
 
+var music_pending_update: bool = false
+
 const PAUSE_MENU: PackedScene = preload("res://scenes/ui/pause_menu.tscn")
 const GAME_OVER: PackedScene = preload("res://scenes/ui/game_over.tscn")
 const MAIN_MENU: PackedScene = preload("res://scenes/ui/MainMenu.tscn")
-const DEATH_SFX: AudioStream = preload("res://art/audio/sfx/mob_death6.mp3")
 
 var pause_menu_instance: CanvasLayer = null
 var game_over_instance: CanvasLayer = null
@@ -28,12 +29,18 @@ var normal_song = preload("res://art/audio/music/She Made Beans WTF But Its Safe
 func _ready() -> void:
 	_start_music()
 	new_game()
-	SettingsManager.ben_mode_changed.connect(_start_music)
+	SettingsManager.ben_mode_changed.connect(func(): music_pending_update = true)
 	$Player.bean_launched.connect(_on_player_bean_launched)
 	$Player.hit.connect(_on_game_over)
 	$MobTimer.timeout.connect(_on_mob_timer_timeout)
 	$ScoreTimer.timeout.connect(_on_score_timer_timeout)
 	$StartTimer.timeout.connect(_on_start_timer_timeout)
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_UNPAUSED:
+		if music_pending_update:
+			_start_music()
+			music_pending_update = false
 
 func _start_music():
 	var  music = ben_song if SettingsManager.get_ben_mode() else normal_song
@@ -62,7 +69,6 @@ func _on_pause_menu_closed():
 # Launch a game over instance and hook up the signals
 func _on_game_over():
 	AudioController.stop_music()
-	AudioController.play_sfx(DEATH_SFX)
 	$ScoreTimer.stop()
 	$MobTimer.stop()
 	if not is_instance_valid(game_over_instance):

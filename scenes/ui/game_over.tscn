@@ -1,12 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://btkpr3jf3mbkx"]
+[gd_scene load_steps=4 format=3 uid="uid://btkpr3jf3mbkx"]
 
 [ext_resource type="Script" uid="uid://bbksi5d0c2swl" path="res://scenes/ui/GameOver.gd" id="1_flebf"]
 [ext_resource type="Texture2D" uid="uid://cau3dwjs2pkji" path="res://art/bill_foster.png" id="2_pcvfx"]
+[ext_resource type="AudioStream" uid="uid://cw2yg17l67205" path="res://art/audio/sfx/police_noise.ogg" id="2_x6o8e"]
 
 [node name="GameOver" type="CanvasLayer"]
 process_mode = 2
 layer = 3
 script = ExtResource("1_flebf")
+game_over_sfx = ExtResource("2_x6o8e")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 modulate = Color(0.34117648, 0.34117648, 0.34117648, 0.50980395)

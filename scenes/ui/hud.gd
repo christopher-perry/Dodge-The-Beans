@@ -10,13 +10,6 @@ func show_message(text):
 	$Message.text = text
 	$Message.show()
 	
-func show_gameover():
-	show_temp_message("Game Over")
-	await $MessageTimer.timeout
-	show_message(game_over_text)
-	await get_tree().create_timer(1.0).timeout
-	
-	
 func update_score(score): 
 	$ScoreLabel.text = str(score)
 
