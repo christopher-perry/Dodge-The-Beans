@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjsmdx8vjxltk"]
+
+[ext_resource type="Script" uid="uid://cb5vo2kjssm6p" path="res://scenes/levels/level_1.gd" id="1_6761a"]
+[ext_resource type="PackedScene" uid="uid://c7n52njetslkf" path="res://scenes/levels/base_level.tscn" id="1_ksju7"]
+
+[sub_resource type="GDScript" id="GDScript_bo48s"]
+script/source = "extends CanvasLayer
+
+var game_over_text = \"Still thinking about thos Beans\"
+
+func show_temp_message(text):
+	show_message(text)
+	$MessageTimer.start()
+	
+func show_message(text):
+	$Message.text = text
+	$Message.show()
+	
+func show_gameover():
+	show_temp_message(\"Game Over\")
+	await $MessageTimer.timeout
+	show_message(game_over_text)
+	await get_tree().create_timer(1.0).timeout
+	
+func update_score(score): 
+	$ScoreLabel.text = str(score)
+
+func _on_message_timer_timeout() -> void:
+	$Message.hide()
+"
+
+[node name="Level1" instance=ExtResource("1_ksju7")]
+script = ExtResource("1_6761a")
+
+[node name="Hud" parent="." index="1"]
+script = SubResource("GDScript_bo48s")

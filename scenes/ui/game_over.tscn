@@ -1,0 +1,75 @@
+[gd_scene load_steps=3 format=3 uid="uid://btkpr3jf3mbkx"]
+
+[ext_resource type="Script" uid="uid://bbksi5d0c2swl" path="res://scenes/ui/GameOver.gd" id="1_flebf"]
+[ext_resource type="Texture2D" uid="uid://cau3dwjs2pkji" path="res://art/bill_foster.png" id="2_pcvfx"]
+
+[node name="GameOver" type="CanvasLayer"]
+process_mode = 2
+layer = 3
+script = ExtResource("1_flebf")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+modulate = Color(0.34117648, 0.34117648, 0.34117648, 0.50980395)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.37254903, 0.07058824, 0.039215688, 0.8156863)
+
+[node name="Background" type="TextureRect" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.47843137)
+z_index = -1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_pcvfx")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="GameOverText" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -31.0
+offset_top = 93.0
+offset_right = 31.0
+offset_bottom = 116.0
+grow_horizontal = 2
+rotation = -0.0008096286
+text = "GAME OVER"
+horizontal_alignment = 1
+
+[node name="OptionsBox" type="VBoxContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -84.75
+offset_top = -102.0
+offset_right = 84.75
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Buttons" type="HBoxContainer" parent="OptionsBox"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="RestartButton" type="Button" parent="OptionsBox/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "RESTART"
+
+[node name="Spacer" type="Control" parent="OptionsBox/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="QuitButton" type="Button" parent="OptionsBox/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "QUIT"

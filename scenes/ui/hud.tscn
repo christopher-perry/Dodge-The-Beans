@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwln3aqdgoxwq"]
+
+[ext_resource type="Script" uid="uid://c30ndo4vygiew" path="res://scenes/ui/hud.gd" id="1_bo48s"]
+[ext_resource type="FontFile" uid="uid://bspccpt0yes1b" path="res://fonts/Xolonium-Regular.ttf" id="2_5ysmq"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_bo48s")
+
+[node name="ScoreLabel" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -238.0
+offset_right = 238.0
+offset_bottom = 78.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0.07615971, 4.5889665e-06, 0.07313309, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("2_5ysmq")
+theme_override_font_sizes/font_size = 64
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MessageTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="Message" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -244.0
+offset_top = -256.0
+offset_right = 236.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0.07615971, 4.5889665e-06, 0.07313309, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("2_5ysmq")
+theme_override_font_sizes/font_size = 64
+text = "I;m thinking about thos Beans"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]

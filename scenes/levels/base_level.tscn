@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://c7n52njetslkf"]
+
+[ext_resource type="PackedScene" uid="uid://cwln3aqdgoxwq" path="res://scenes/ui/hud.tscn" id="1_7cuwn"]
+[ext_resource type="Script" uid="uid://c23o06lv8lq7e" path="res://scenes/levels/base_level.gd" id="1_ht5s7"]
+[ext_resource type="PackedScene" uid="uid://drayceavvg68c" path="res://scenes/mob.tscn" id="2_wwrw0"]
+[ext_resource type="Texture2D" uid="uid://dkpgapvnrpq2o" path="res://art/beans.jpg" id="3_o1chu"]
+[ext_resource type="PackedScene" uid="uid://qi8jnfvg7lhb" path="res://scenes/player.tscn" id="3_ukglk"]
+
+[sub_resource type="Curve2D" id="Curve2D_ukglk"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 480, 0, 0, 0, 0, 0, 480, 720, 0, 0, 0, 0, 0, 720, 0, 0, 0, 0, 1, 1)
+}
+point_count = 5
+
+[node name="BaseLevel" type="Node2D"]
+script = ExtResource("1_ht5s7")
+mob_scene = ExtResource("2_wwrw0")
+benMode = false
+
+[node name="BGLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Background" type="TextureRect" parent="BGLayer"]
+z_index = -1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_o1chu")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Hud" parent="." instance=ExtResource("1_7cuwn")]
+
+[node name="Player" parent="." instance=ExtResource("3_ukglk")]
+
+[node name="StartPosition" type="Marker2D" parent="."]
+position = Vector2(240, 450)
+
+[node name="MobPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_ukglk")
+
+[node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
+
+[node name="MobTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="ScoreTimer" type="Timer" parent="."]
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true

@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bluupn7wye4wr"]
+
+[ext_resource type="Script" uid="uid://dqscj21qnvkiq" path="res://scenes/bean.gd" id="1_d60m5"]
+[ext_resource type="Texture2D" uid="uid://ovgl0gk2lcpl" path="res://art/beansprite.png" id="2_k7glu"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tn1bn"]
+radius = 8.0
+height = 28.0
+
+[node name="Bean" type="Area2D"]
+collision_layer = 4
+collision_mask = 6
+script = ExtResource("1_d60m5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_tn1bn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_k7glu")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

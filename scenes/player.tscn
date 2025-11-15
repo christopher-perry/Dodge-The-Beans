@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://qi8jnfvg7lhb"]
+[gd_scene load_steps=9 format=3 uid="uid://qi8jnfvg7lhb"]
 
 [ext_resource type="Texture2D" uid="uid://c7wgbq3c2ml5o" path="res://art/playerGrey_up1.png" id="1_hqtel"]
-[ext_resource type="Script" uid="uid://jxl6fnto5vrl" path="res://scenes/player.gd" id="1_sweqy"]
+[ext_resource type="Script" uid="uid://baq0p43gyoyue" path="res://scenes/player.gd" id="1_tuyoq"]
 [ext_resource type="Texture2D" uid="uid://cfbwjvv15mfu3" path="res://art/playerGrey_up2.png" id="2_sweqy"]
 [ext_resource type="Texture2D" uid="uid://dphkfjm2eg43h" path="res://art/playerGrey_walk1.png" id="3_2hs0m"]
 [ext_resource type="Texture2D" uid="uid://bshvv7ql2fnlf" path="res://art/playerGrey_walk2.png" id="4_1jxqw"]
+[ext_resource type="Texture2D" uid="uid://1q3jquclkawo" path="res://art/beans_can.png" id="6_tuyoq"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dw050"]
 animations = [{
@@ -36,8 +37,8 @@ radius = 27.0
 height = 66.0
 
 [node name="Player" type="Area2D"]
-script = ExtResource("1_sweqy")
-metadata/_edit_group_ = true
+collision_mask = 7
+script = ExtResource("1_tuyoq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
@@ -46,5 +47,16 @@ animation = &"up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_b26j0")
+
+[node name="FireTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="BeanLauncher" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="BeanLauncher"]
+position = Vector2(57, -13.000004)
+rotation = 1.4046513
+scale = Vector2(0.094827585, 0.09523808)
+texture = ExtResource("6_tuyoq")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

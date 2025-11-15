@@ -1,0 +1,144 @@
+[gd_scene load_steps=4 format=3 uid="uid://dcr3scvy7ij4p"]
+
+[ext_resource type="Script" uid="uid://drm203b1o27u6" path="res://scenes/ui/Options.gd" id="1_eyigu"]
+[ext_resource type="Texture2D" uid="uid://cau3dwjs2pkji" path="res://art/bill_foster.png" id="2_8rfej"]
+
+[sub_resource type="Theme" id="Theme_1a2md"]
+
+[node name="Options" type="CanvasLayer"]
+process_mode = 3
+layer = 4
+script = ExtResource("1_eyigu")
+
+[node name="Background" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_8rfej")
+expand_mode = 2
+
+[node name="OptionsContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="OptionsContainer"]
+layout_mode = 2
+text = "Options"
+
+[node name="AudioTab" type="TabContainer" parent="OptionsContainer"]
+layout_mode = 2
+theme = SubResource("Theme_1a2md")
+current_tab = 0
+clip_tabs = false
+
+[node name="Audio" type="VBoxContainer" parent="OptionsContainer/AudioTab"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="MasterVolume" type="HBoxContainer" parent="OptionsContainer/AudioTab/Audio"]
+layout_mode = 2
+
+[node name="MasterLabel" type="Label" parent="OptionsContainer/AudioTab/Audio/MasterVolume"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "Master Volume"
+horizontal_alignment = 1
+
+[node name="MasterSlider" type="HSlider" parent="OptionsContainer/AudioTab/Audio/MasterVolume"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.01
+
+[node name="MusicVolume" type="HBoxContainer" parent="OptionsContainer/AudioTab/Audio"]
+layout_mode = 2
+
+[node name="MusicLabel" type="Label" parent="OptionsContainer/AudioTab/Audio/MusicVolume"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "Music Volume"
+horizontal_alignment = 1
+
+[node name="MusicSlider" type="HSlider" parent="OptionsContainer/AudioTab/Audio/MusicVolume"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.01
+
+[node name="SliderSpacer" type="Control" parent="OptionsContainer/AudioTab/Audio/MusicVolume"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SFXVolume" type="HBoxContainer" parent="OptionsContainer/AudioTab/Audio"]
+layout_mode = 2
+
+[node name="SFXLabel" type="Label" parent="OptionsContainer/AudioTab/Audio/SFXVolume"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "SFX Volume"
+horizontal_alignment = 1
+
+[node name="SFXSlider" type="HSlider" parent="OptionsContainer/AudioTab/Audio/SFXVolume"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.01
+
+[node name="SliderSpacer" type="Control" parent="OptionsContainer/AudioTab/Audio/SFXVolume"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BenMode" type="CheckBox" parent="OptionsContainer/AudioTab/Audio"]
+layout_mode = 2
+text = "Ben Mode"
+
+[node name="VideoTab" type="TabContainer" parent="OptionsContainer"]
+layout_mode = 2
+current_tab = 0
+metadata/_tab_index = 0
+
+[node name="Video" type="VBoxContainer" parent="OptionsContainer/VideoTab"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Fullscreen" type="HBoxContainer" parent="OptionsContainer/VideoTab/Video"]
+layout_mode = 2
+alignment = 1
+
+[node name="FullscreenBox" type="CheckBox" parent="OptionsContainer/VideoTab/Video/Fullscreen"]
+layout_mode = 2
+text = "Fullscreen"
+
+[node name="VSync" type="HBoxContainer" parent="OptionsContainer/VideoTab/Video"]
+layout_mode = 2
+alignment = 1
+
+[node name="VSyncBox" type="CheckBox" parent="OptionsContainer/VideoTab/Video/VSync"]
+layout_mode = 2
+text = "VSync Enabled"
+
+[node name="Controls" type="TabContainer" parent="OptionsContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Buttons" type="HBoxContainer" parent="OptionsContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Back" type="Button" parent="OptionsContainer/Buttons"]
+layout_mode = 2
+text = "Back"
+
+[node name="RestoreDefaults" type="Button" parent="OptionsContainer/Buttons"]
+layout_mode = 2
+text = "Restore Defaults"

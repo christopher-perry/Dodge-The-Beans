@@ -1,0 +1,71 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsxdt647qd4t3"]
+
+[ext_resource type="Script" uid="uid://c8qywc5xvtcoi" path="res://scenes/ui/PauseMenu.gd" id="1_36lgw"]
+
+[node name="PauseMenu" type="CanvasLayer"]
+process_mode = 2
+layer = 3
+script = ExtResource("1_36lgw")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+modulate = Color(0.34117648, 0.34117648, 0.34117648, 0.50980395)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -31.0
+offset_top = 93.0
+offset_right = 31.0
+offset_bottom = 116.0
+grow_horizontal = 2
+rotation = -0.0008096286
+text = "PAUSED"
+horizontal_alignment = 1
+
+[node name="PauseBar" type="VBoxContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -62.5
+offset_top = -128.0
+offset_right = 62.5
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Buttons" type="VBoxContainer" parent="PauseBar"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="ResumeButton" type="Button" parent="PauseBar/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "RESUME"
+
+[node name="OptionsButton" type="Button" parent="PauseBar/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "OPTIONS"
+
+[node name="TerminalButtons" type="HBoxContainer" parent="PauseBar/Buttons"]
+layout_mode = 2
+
+[node name="RestartButton" type="Button" parent="PauseBar/Buttons/TerminalButtons"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "RESTART"
+
+[node name="QuitButton" type="Button" parent="PauseBar/Buttons/TerminalButtons"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "QUIT"
