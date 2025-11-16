@@ -5,7 +5,7 @@ signal unpause
 signal restart_requested
 signal quit_requested
 
-const OPTIONS_SCENE: PackedScene = preload("res://scenes/ui/Options.tscn")
+const OPTIONS_SCENE: PackedScene = preload("res://scenes/ui/options.tscn")
 
 @onready var resume_button: Button = $PauseBar/Buttons/ResumeButton
 @onready var options_button: Button = $PauseBar/Buttons/OptionsButton

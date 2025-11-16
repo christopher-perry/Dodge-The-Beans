@@ -5,7 +5,7 @@ extends Control
 @onready var options_button: Button = $Layout/MenuOptionsContainer/OptionsButton
 @onready var exit_button: Button = $Layout/MenuOptionsContainer/ExitButton
 
-const OPTIONS_SCENE: PackedScene = preload("res://scenes/ui/Options.tscn")
+const OPTIONS_SCENE: PackedScene = preload("res://scenes/ui/options.tscn")
 
 func _ready():
 	start_button.grab_focus()
