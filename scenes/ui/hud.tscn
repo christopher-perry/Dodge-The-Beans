@@ -1,10 +1,47 @@
-[gd_scene load_steps=3 format=3 uid="uid://cwln3aqdgoxwq"]
+[gd_scene load_steps=8 format=3 uid="uid://cwln3aqdgoxwq"]
 
 [ext_resource type="Script" uid="uid://c30ndo4vygiew" path="res://scenes/ui/hud.gd" id="1_bo48s"]
 [ext_resource type="FontFile" uid="uid://bspccpt0yes1b" path="res://fonts/Xolonium-Regular.ttf" id="2_5ysmq"]
+[ext_resource type="Texture2D" uid="uid://koymu4ib5aja" path="res://art/pause.png" id="2_8qguk"]
+[ext_resource type="StyleBox" uid="uid://herm7rv04s5c" path="res://scenes/ui/hud_pause_button.tres" id="2_136eg"]
+[ext_resource type="Script" uid="uid://bk8xd6felyn8w" path="res://addons/virtual_joystick/virtual_joystick_instantiator.gd" id="3_bo48s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oj5la"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0, 0, 0.6)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_136eg"]
+bg_color = Color(0.36847892, 0.36847895, 0.36847892, 0.6039216)
+corner_radius_top_left = 70
+corner_radius_top_right = 70
+corner_radius_bottom_right = 70
+corner_radius_bottom_left = 70
+expand_margin_left = 6.0
+expand_margin_top = 6.0
+expand_margin_right = 6.0
+expand_margin_bottom = 6.0
 
 [node name="HUD" type="CanvasLayer"]
+layer = 2
 script = ExtResource("1_bo48s")
+
+[node name="Pause" type="Button" parent="."]
+offset_right = 126.0
+offset_bottom = 158.0
+scale = Vector2(0.24881889, 0.20270622)
+pivot_offset = Vector2(10, 10)
+theme_override_styles/normal = ExtResource("2_136eg")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_oj5la")
+theme_override_styles/hover = SubResource("StyleBoxFlat_136eg")
+icon = ExtResource("2_8qguk")
 
 [node name="ScoreLabel" type="Label" parent="."]
 anchors_preset = 5
@@ -47,4 +84,17 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
+[node name="Virtual Joystick" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+scale = Vector2(0.55, 0.55)
+script = ExtResource("3_bo48s")
+metadata/_custom_type_script = "uid://bk8xd6felyn8w"
+
+[connection signal="button_down" from="Pause" to="." method="_on_pause_button_down"]
+[connection signal="pressed" from="Pause" to="." method="_on_pause_pressed"]
+[connection signal="toggled" from="Pause" to="." method="_on_pause_toggled"]
 [connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]

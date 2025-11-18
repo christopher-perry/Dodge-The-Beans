@@ -30,18 +30,17 @@ func _ready() -> void:
 	
 func _process(delta: float) -> void:
 	var velocity = Vector2.ZERO
-	if Input.is_action_pressed("move_right"):
-		velocity.x += 1
-	if Input.is_action_pressed("move_left"):
-		velocity.x -= 1
-	if Input.is_action_pressed("move_down"):
-		velocity.y += 1
-	if Input.is_action_pressed("move_up"):
-		velocity.y -= 1
+	var move_right_strength = Input.get_action_strength("move_right")
+	var move_left_strength = Input.get_action_strength("move_left")
+	velocity.x = move_right_strength - move_left_strength
+	
+	var move_down_strength = Input.get_action_strength("move_down")
+	var move_up_strength = Input.get_action_strength("move_up")
+	velocity.y = move_down_strength - move_up_strength
 
-	# --- Movement and Animation ---
+
 	if velocity.length() > 0:
-		velocity = velocity.normalized() * speed
+		velocity = velocity.normalized() * speed * velocity.length()
 		sprite.play()
 	else:
 		sprite.stop()
@@ -60,24 +59,19 @@ func _process(delta: float) -> void:
 	# --- Aiming Logic ---
 	var aim_direction = Vector2.ZERO
 	
-	# 1. Mouse Aiming
 	if Input.get_last_mouse_velocity().length() > 0:
-		# Direction from player position to mouse position
 		aim_direction = get_global_mouse_position() - global_position
-	# 2. Joystick Aiming (assuming "aim_x" and "aim_y" are set up for the right stick)
 	else:
 		aim_direction.x = Input.get_action_strength("aim_right") - Input.get_action_strength("aim_left")
 		aim_direction.y = Input.get_action_strength("aim_down") - Input.get_action_strength("aim_up")
-		# If the player is moving, the movement velocity can be a fallback aim direction
 		if aim_direction == Vector2.ZERO and velocity != Vector2.ZERO:
 			aim_direction = velocity
 	
-	# Rotate the launcher to face the aim direction
 	if aim_direction.length() > 0:
 		bean_launcher.rotation = aim_direction.angle()
 		
 	# --- Firing Logic ---
-	if Input.is_action_pressed("fire") and can_fire:
+	if Input.is_action_pressed("fire") and can_fire and aim_direction.length() > 0:
 		launch_bean(aim_direction)
 
 func launch_bean(direction: Vector2):

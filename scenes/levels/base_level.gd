@@ -35,7 +35,7 @@ func _ready() -> void:
 	$MobTimer.timeout.connect(_on_mob_timer_timeout)
 	$ScoreTimer.timeout.connect(_on_score_timer_timeout)
 	$StartTimer.timeout.connect(_on_start_timer_timeout)
-
+	
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_UNPAUSED:
 		if music_pending_update:
@@ -47,15 +47,9 @@ func _start_music():
 	AudioController.play_music(music)
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_pause", false):
+	if event.is_action_pressed("ui_pause", false):	
 		get_viewport().set_input_as_handled()
-		if is_instance_valid(pause_menu_instance):
-			# If pause menu is already open (or an Options menu inside it is open),
-			# pressing 'ui_cancel' should be handled by the pause menu itself (e.g., to resume).
-			# If you are HERE, it means the input made it all the way up, so we should ignore it.
-			pass
-		else:
-			show_pause_menu()
+		_pause()
 
 func show_pause_menu():
 	if not is_instance_valid(pause_menu_instance):
@@ -74,7 +68,6 @@ func _on_game_over():
 	if not is_instance_valid(game_over_instance):
 		game_over_instance = GAME_OVER.instantiate()
 		add_child(game_over_instance)
-		
 		_hook_up_quit_and_restart(game_over_instance)
 
 func _hook_up_quit_and_restart(instance: CanvasLayer):
@@ -99,7 +92,7 @@ func _on_restart_signal():
 
 func _on_score_timer_timeout():
 	score += 1
-	$Hud.update_score(score)
+	$HUD.update_score(score)
 
 func _on_start_timer_timeout():
 	$MobTimer.start()
@@ -108,8 +101,10 @@ func _on_start_timer_timeout():
 func new_game():
 	_start_music()
 	score = 0
-	$Hud.update_score(score)
-	$Hud.show_temp_message("Get Ready")
+	# This shouldn't go here but error when in _ready
+	$HUD.pause_req.connect(_pause)
+	$HUD.update_score(score)
+	$HUD.show_temp_message("Get Ready")
 	get_tree().call_group("mobs", "queue_free")
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
@@ -141,3 +136,12 @@ func _on_player_bean_launched(launch_pos: Vector2, direction: Vector2):
 	bean.start(launch_pos, direction)
 	
 	add_child(bean)
+
+func _pause():
+	if is_instance_valid(pause_menu_instance):
+		# If pause menu is already open (or an Options menu inside it is open),
+		# pressing 'ui_cancel' should be handled by the pause menu itself (e.g., to resume).
+		# If you are HERE, it means the input made it all the way up, so we should ignore it.
+		pass
+	else:
+		show_pause_menu()

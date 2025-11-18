@@ -1,5 +1,9 @@
 extends CanvasLayer
 
+class_name HUD
+
+signal pause_req
+
 var game_over_text = "Still thinking about thos Beans"
 
 func show_temp_message(text):
@@ -15,3 +19,6 @@ func update_score(score):
 
 func _on_message_timer_timeout() -> void:
 	$Message.hide()
+
+func _on_pause_pressed() -> void:
+	pause_req.emit()

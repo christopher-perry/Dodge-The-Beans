@@ -31,7 +31,7 @@ texture = ExtResource("3_o1chu")
 expand_mode = 1
 stretch_mode = 6
 
-[node name="Hud" parent="." instance=ExtResource("1_7cuwn")]
+[node name="HUD" parent="." instance=ExtResource("1_7cuwn")]
 
 [node name="Player" parent="." instance=ExtResource("3_ukglk")]
 

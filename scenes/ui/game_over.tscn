@@ -6,7 +6,7 @@
 
 [node name="GameOver" type="CanvasLayer"]
 process_mode = 2
-layer = 3
+layer = 4
 script = ExtResource("1_flebf")
 game_over_sfx = ExtResource("2_x6o8e")
 
