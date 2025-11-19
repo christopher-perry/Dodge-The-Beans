@@ -9,6 +9,7 @@ extends Node
 # SettingsManager.save_settings() must be invoked.
 
 signal ben_mode_changed
+signal touch_controls_changed
 
 # Default Settings dict for easy twiddling
 const DEFAULT_SETTINGS := {
@@ -21,13 +22,17 @@ const DEFAULT_SETTINGS := {
 	"video": {
 		"fullscreen": false,
 		"vsync": false,
-	}
+	},
+	"controls": {
+		"touch_controls": true,
+	},
 }
 const BUSSES := ["Master", "Music", "SFX"]
 const SETTINGS_FILE_PATH := "user://game_settings.cfg"
 
 var config = ConfigFile.new()
-var _ben_mode
+var _ben_mode: bool
+var _touch_controls: bool
 
 func _ready():
 	print("User Data Path: " + OS.get_user_data_dir())
@@ -60,10 +65,13 @@ func load_settings():
 	
 	var vsync = config.get_value("Video", "vsync", DEFAULT_SETTINGS.video.vsync)
 	apply_vsync_setting(vsync)
+	
+	# Controls
+	var touch_controls = config.get_value("Controls", "touch_controls", DEFAULT_SETTINGS.controls.touch_controls)
+	
 	print("Applied settings: master: " + str(master_vol) + ", music: " + 
 		str(music_vol) + ", sfx: " + str(sfx_vol) + ", fullscreen: " +
-		str(fullscreen) + ", vsync: " + str(vsync))
-
+		str(fullscreen) + ", vsync: " + str(vsync) + ", touch_controls: " + str(touch_controls))
 
 func apply_volume_setting(bus: String, linear_value: float):
 	var index = AudioServer.get_bus_index(bus)
@@ -82,6 +90,10 @@ func apply_vsync_setting(on):
 	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED if on
 		else DisplayServer.VSYNC_DISABLED)
 
+func apply_touch_controls(on):
+	_touch_controls = on
+	touch_controls_changed.emit(on)
+
 func save_settings():
 	# Persist the current state of settings to the ConfigFile object
 	# Audio
@@ -97,6 +109,9 @@ func save_settings():
 	config.set_value("Video", "vsync", DisplayServer.VSYNC_ENABLED
 			 == DisplayServer.window_get_vsync_mode())
 
+	# Controls
+	config.set_value("Controls", "touch_controls", _touch_controls)
+
 	# Dump the config object to the disk
 	var error = config.save(SETTINGS_FILE_PATH)
 	if error != OK:
@@ -108,6 +123,8 @@ func apply_defaults():
 	apply_volume_setting("SFX", DEFAULT_SETTINGS.audio.sfx_volume)
 	apply_fullscreen_setting(DEFAULT_SETTINGS.video.fullscreen)
 	apply_vsync_setting(DEFAULT_SETTINGS.video.vsync)
+	apply_ben_mode(DEFAULT_SETTINGS.audio.ben_mode)
+	apply_touch_controls(DEFAULT_SETTINGS.controls.touch_controls)
 
 func get_ben_mode():
 	return _ben_mode
@@ -120,6 +137,9 @@ func get_vsync_enabled():
 	
 func get_fullscreen_enabled():
 	return DisplayServer.WINDOW_MODE_FULLSCREEN == DisplayServer.window_get_mode()
+	
+func get_touch_controls_enabled():
+	return _touch_controls
 
 func _init():
 	# Seed the random number generator only once courtesy of the autoloader

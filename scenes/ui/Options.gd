@@ -13,6 +13,7 @@ signal closed
 @onready var ben_mode: CheckBox = $OptionsContainer/AudioTab/Audio/BenMode
 @onready var fullscreen_toggle: CheckBox = $OptionsContainer/VideoTab/Video/Fullscreen/FullscreenBox
 @onready var vsync_toggle: CheckBox = $OptionsContainer/VideoTab/Video/VSync/VSyncBox
+@onready var touch_controls_box = $OptionsContainer/ControlsTab/Controls/Touch/TouchBox
 @onready var back_button: Button = $OptionsContainer/Buttons/Back
 @onready var restore_defaults_button: Button = $OptionsContainer/Buttons/RestoreDefaults
 
@@ -25,6 +26,8 @@ func _ready() -> void:
 
 	fullscreen_toggle.toggled.connect(_on_fullscreen_enabled_toggled)
 	vsync_toggle.toggled.connect(_on_v_sync_enabled_toggled)
+	
+	touch_controls_box.toggled.connect(_on_touch_controls_toggled)
 
 	back_button.pressed.connect(_on_back_pressed)
 	restore_defaults_button.pressed.connect(_on_restore_defaults_pressed)
@@ -39,6 +42,8 @@ func init_ui_values():
 	
 	fullscreen_toggle.button_pressed = SettingsManager.get_vsync_enabled()
 	vsync_toggle.button_pressed = SettingsManager.get_vsync_enabled()
+	
+	touch_controls_box.button_pressed = SettingsManager.get_touch_controls_enabled()
 
 func set_bus_volume(bus_name: , value: float):
 	SettingsManager.apply_volume_setting(bus_name, value)
@@ -62,6 +67,9 @@ func _on_fullscreen_enabled_toggled(on: bool):
 	
 func _on_v_sync_enabled_toggled(on: bool):
 	SettingsManager.apply_vsync_setting(on)
+
+func _on_touch_controls_toggled(on: bool):
+	SettingsManager.apply_touch_controls(on)
 
 func _on_back_pressed():
 	SettingsManager.save_settings()

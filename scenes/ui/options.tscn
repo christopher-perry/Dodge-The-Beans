@@ -126,10 +126,22 @@ alignment = 1
 layout_mode = 2
 text = "VSync Enabled"
 
-[node name="Controls" type="TabContainer" parent="OptionsContainer"]
-visible = false
+[node name="ControlsTab" type="TabContainer" parent="OptionsContainer"]
+layout_mode = 2
+current_tab = 0
+metadata/_tab_index = 0
+
+[node name="Controls" type="VBoxContainer" parent="OptionsContainer/ControlsTab"]
 layout_mode = 2
 metadata/_tab_index = 0
+
+[node name="Touch" type="HBoxContainer" parent="OptionsContainer/ControlsTab/Controls"]
+layout_mode = 2
+alignment = 1
+
+[node name="TouchBox" type="CheckBox" parent="OptionsContainer/ControlsTab/Controls/Touch"]
+layout_mode = 2
+text = "Touch Controls Enabled"
 
 [node name="Buttons" type="HBoxContainer" parent="OptionsContainer"]
 layout_mode = 2
