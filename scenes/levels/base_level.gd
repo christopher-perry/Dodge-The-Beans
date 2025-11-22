@@ -24,6 +24,7 @@ var score
 
 var ben_song = preload("res://art/audio/music/Raining Tacos.ogg")
 var normal_song = preload("res://art/audio/music/She Made Beans WTF But Its Safe And Sound By Capital Cities.ogg")
+var six_seven_fx = preload("res://art/audio/sfx/67.ogg")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -81,18 +82,23 @@ func _on_quit_signal():
 	get_tree().change_scene_to_packed(MAIN_MENU)
 
 func _stop_scene():
-	# Any additional state cleanup we need to do in the future goes here
-	get_tree().paused = false
 	AudioController.stop_music()
 	AudioController.stop_sfx()
+	$MobTimer.stop()
+	$ScoreTimer.stop()
+	# Any additional state cleanup we need to do in the future goes here
+	get_tree().paused = false
+	
 
 func _on_restart_signal():
 	_stop_scene()
-	get_tree().reload_current_scene()
+	get_tree().call_deferred("reload_current_scene")
 
 func _on_score_timer_timeout():
 	score += 1
 	$HUD.update_score(score)
+	if score == 67:
+		AudioController.play_sfx(six_seven_fx)
 
 func _on_start_timer_timeout():
 	$MobTimer.start()

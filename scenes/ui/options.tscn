@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dcr3scvy7ij4p"]
 
-[ext_resource type="Script" uid="uid://drm203b1o27u6" path="res://scenes/ui/options.gd" id="1_eyigu"]
+[ext_resource type="Script" path="res://scenes/ui/Options.gd" id="1_eyigu"]
 [ext_resource type="Texture2D" uid="uid://cau3dwjs2pkji" path="res://art/bill_foster.png" id="2_8rfej"]
 
 [sub_resource type="Theme" id="Theme_1a2md"]

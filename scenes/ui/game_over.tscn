@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://btkpr3jf3mbkx"]
 
 [ext_resource type="Script" uid="uid://bbksi5d0c2swl" path="res://scenes/ui/GameOver.gd" id="1_flebf"]
-[ext_resource type="AudioStream" uid="uid://boqkirsepkx88" path="res://art/audio/sfx/police noise vroom.ogg" id="2_x6o8e"]
+[ext_resource type="AudioStream" uid="uid://cilgaqq8dpvjy" path="res://art/audio/sfx/mob_death6.ogg" id="2_x6o8e"]
 [ext_resource type="LabelSettings" uid="uid://tdoxglijt3r0" path="res://scenes/ui/MainMenu.tres" id="4_vfrx6"]
 
 [node name="GameOver" type="CanvasLayer"]

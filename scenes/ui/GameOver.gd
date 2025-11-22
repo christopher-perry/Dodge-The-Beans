@@ -14,7 +14,7 @@ func _ready() -> void:
 	get_tree().paused = true
 	AudioController.play_sfx(game_over_sfx)
 	game_over_label.text = GAME_OVER_TEXT
-	
+	restart_button.grab_focus()
 	restart_button.pressed.connect(_on_restart_pressed)
 	quit_button.pressed.connect(_on_quit_pressed)
 
